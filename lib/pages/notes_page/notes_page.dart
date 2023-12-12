@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ws_homework_sentiments/pages/notes_page/widgets/notes_scrollview.dart';
 
 class NotesPage extends StatefulWidget {
   const NotesPage({super.key});
@@ -10,15 +11,8 @@ class NotesPage extends StatefulWidget {
 class _NotesPageState extends State<NotesPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text('All notes'),
-        ),
-      ),
-      body: const Center(
-        child: Text('NOTES PAGE'),
-      ),
+    return const Scaffold(
+      body: NotesScrollView(),
     );
   }
 }

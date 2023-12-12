@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ws_homework_sentiments/themes/theme.dart';
+import 'package:ws_homework_sentiments/theme/theme.dart';
 
 class ThemeManager {
-  static ThemeData setDarkTheme() {
-    return createDarkTheme();
+  static ThemeData setDarkTheme(BuildContext context) {
+    return createDarkTheme(context);
   }
 
   // TODO light theme setter
