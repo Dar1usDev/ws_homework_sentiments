@@ -27,11 +27,16 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
         children: [
           Icon(widget.iconData),
           Center(
-            child: Text(
-              widget.text,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
+            child: Padding(
+              padding: (widget.iconData == null)
+                  ? EdgeInsets.zero
+                  : EdgeInsets.only(left: 30.0),
+              child: Text(
+                widget.text,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14,
+                ),
               ),
             ),
           ),

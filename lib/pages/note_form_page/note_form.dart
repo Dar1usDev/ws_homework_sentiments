@@ -4,6 +4,7 @@ import 'package:ws_homework_sentiments/pages/common_widgets/custom_sliver_app_ba
 import 'package:ws_homework_sentiments/pages/common_widgets/custom_text_field.dart';
 import 'package:ws_homework_sentiments/pages/note_form_page/widgets/custom_elevated_button.dart';
 import 'package:ws_homework_sentiments/pages/note_form_page/widgets/mood_picker.dart';
+import 'package:ws_homework_sentiments/services/locator.dart';
 
 enum ButtonState {
   unknown,
@@ -18,16 +19,9 @@ class NoteForm extends StatefulWidget {
 }
 
 class _NoteFormState extends State<NoteForm> {
-  ButtonState _locationState = ButtonState.unknown;
   ButtonState _weatherState = ButtonState.unknown;
 
-  void setLocationState() {
-    _locationState = (_locationState == ButtonState.unknown)
-        ? ButtonState.known
-        : ButtonState.unknown;
-    print('location');
-    setState(() {});
-  }
+  late String _coords;
 
   void setWeatherState() {
     _weatherState = (_weatherState == ButtonState.unknown)
@@ -37,33 +31,18 @@ class _NoteFormState extends State<NoteForm> {
     setState(() {});
   }
 
-  Widget locationWidget() {
-    return switch (_locationState) {
-      ButtonState.unknown => CustomElevatedButton(
-          function: () {
-            setLocationState();
-          },
-          text: 'Геолокация',
-          iconData: Icons.location_on,
-        ),
-      ButtonState.known => CustomElevatedButton(
-          text: 'Хабаровск',
-          iconData: Icons.location_on,
-        ),
-    };
-  }
-
   Widget weatherWidget() {
     return switch (_weatherState) {
       ButtonState.unknown => CustomElevatedButton(
-          function: () {
+          function: () async {
+            _coords = await Locator.getCurrentLocation();
             setWeatherState();
           },
-          text: 'Погода',
+          text: 'Привязать погоду',
           iconData: Icons.cloud,
         ),
       ButtonState.known => CustomElevatedButton(
-          text: 'Ветер....',
+          text: 'Координаты ${_coords}',
           iconData: Icons.cloud,
         ),
     };
@@ -96,29 +75,11 @@ class _NoteFormState extends State<NoteForm> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 80,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 50,
-                            child: locationWidget(),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 50,
-                            child: weatherWidget(),
-                          ),
-                        ),
-                      ),
-                    ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: weatherWidget(),
                   ),
                 ),
                 FittedBox(
