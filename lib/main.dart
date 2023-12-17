@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ws_homework_sentiments/route_page.dart';
-import 'package:ws_homework_sentiments/theme/theme_manager.dart';
+import 'package:ws_homework_sentiments/ui/theme/theme_manager.dart';
 
 void main() {
   runApp(const MyApp());

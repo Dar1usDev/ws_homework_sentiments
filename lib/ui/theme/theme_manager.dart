@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ws_homework_sentiments/theme/theme.dart';
+import 'package:ws_homework_sentiments/ui/theme/theme.dart';
 
 class ThemeManager {
   static ThemeData setDarkTheme(BuildContext context) {
