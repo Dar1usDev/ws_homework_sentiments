@@ -71,7 +71,7 @@ class MoodIconButton extends StatelessWidget {
                 ? activeIconOpacity
                 : shadowIconOpacity,
             child: Image.asset(
-              'lib/assets/mood_icons/mood$iconIndex.png',
+              'lib/assets/icons/mood/mood$iconIndex.png',
               scale: 1.0,
             ),
           ),

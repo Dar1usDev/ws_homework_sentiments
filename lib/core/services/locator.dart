@@ -1,9 +1,9 @@
 import 'package:geolocator/geolocator.dart';
 
 class Locator {
-  static Future<String> getCurrentLocation() async {
+  static Future<(double, double)> getCurrentLocation() async {
     final result = await _determinePosition();
-    return '${result.latitude.floor()} ${result.longitude.floor()}';
+    return (result.latitude, result.longitude);
   }
 
   static Future<Position> _determinePosition() async {

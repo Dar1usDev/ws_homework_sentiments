@@ -11,7 +11,7 @@ class RoutePage extends StatefulWidget {
 }
 
 class _RoutePageState extends State<RoutePage> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 2;
 
   static const List<Widget> _widgetOptions = <Widget>[
     StatisticPage(),

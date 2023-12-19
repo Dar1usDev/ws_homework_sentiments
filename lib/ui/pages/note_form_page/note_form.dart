@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ws_homework_sentiments/core/services/locator.dart';
+import 'package:ws_homework_sentiments/core/services/network_repository.dart';
 import 'package:ws_homework_sentiments/ui/pages/common_widgets/custom_long_text_field.dart';
 import 'package:ws_homework_sentiments/ui/pages/common_widgets/custom_sliver_app_bar.dart';
 import 'package:ws_homework_sentiments/ui/pages/common_widgets/custom_text_field.dart';
@@ -21,13 +21,12 @@ class NoteForm extends StatefulWidget {
 class _NoteFormState extends State<NoteForm> {
   ButtonState _weatherState = ButtonState.unknown;
 
-  late String _coords;
+  late String _weather;
 
   void setWeatherState() {
     _weatherState = (_weatherState == ButtonState.unknown)
         ? ButtonState.known
         : ButtonState.unknown;
-    print('weather');
     setState(() {});
   }
 
@@ -35,14 +34,16 @@ class _NoteFormState extends State<NoteForm> {
     return switch (_weatherState) {
       ButtonState.unknown => CustomElevatedButton(
           function: () async {
-            _coords = await Locator.getCurrentLocation();
+            _weather = (await NetworkRepository().getCurrentWeather())
+                .current['temp']
+                .toString();
             setWeatherState();
           },
           text: 'Привязать погоду',
           iconData: Icons.cloud,
         ),
       ButtonState.known => CustomElevatedButton(
-          text: 'Координаты ${_coords}',
+          text: '${_weather}',
           iconData: Icons.cloud,
         ),
     };

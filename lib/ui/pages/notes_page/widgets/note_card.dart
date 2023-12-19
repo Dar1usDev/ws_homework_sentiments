@@ -44,9 +44,7 @@ class _NoteCardState extends State<NoteCard> {
                   width: 100,
                   child: Center(
                     child: Image.asset(
-                      'lib/assets/mood_icons/mood${Random().nextInt(4) + 1}.png',
-                      // Раскомментить после привязки бд
-                      // 'lib/assets/mood_icons/mood${widget.iconIndex}}.png',
+                      'lib/assets/icons/mood/mood${Random().nextInt(4) + 1}.png',
                       scale: 1.0,
                       width: 65,
                     ),

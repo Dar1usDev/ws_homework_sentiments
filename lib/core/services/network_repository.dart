@@ -1,6 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:ws_homework_sentiments/core/models/weather.dart';
+import 'package:ws_homework_sentiments/core/services/locator.dart';
+import 'package:ws_homework_sentiments/core/services/rest_client.dart';
 
 class NetworkRepository {
+  late final RestClient _client;
   final Dio _dio = Dio();
 
   static String _API_KEY = '6be4c1fd4c7c175cd559bb49f27d307f';
@@ -9,24 +13,37 @@ class NetworkRepository {
     _dio.interceptors
         .add(LogInterceptor(requestBody: true, responseBody: true));
     _dio.options.baseUrl = 'https://api.openweathermap.org';
+    _client = RestClient(_dio);
   }
 
-  Future getCurrentWeather({
-    required double latitude,
-    required double longitude,
-  }) async {
-    final response = await _dio.get(
-      '/data/3.0/onecall',
-      queryParameters: {
-        'lat': latitude,
-        'lon': longitude,
-        'exclude': 'minutely,hourly,daily,alert',
-        'appid': _API_KEY,
-        'units': 'metric',
-      },
+  Future<Weather> getCurrentWeather() async {
+    double latitude, longitude;
+    (latitude, longitude) = await Locator.getCurrentLocation();
+
+    const EXCLUDE_TYPES = 'minutely,hourly,daily,alert';
+    const UNITS = 'metric';
+
+    final response = await _client.getCurrentWeather(
+      latitude,
+      longitude,
+      EXCLUDE_TYPES,
+      _API_KEY,
+      UNITS,
     );
 
-    return Future(() => null);
+    // TODO вариант реализации без RestApi
+    // final response = await _dio.get(
+    //   '/data/3.0/onecall',
+    //   queryParameters: {
+    //     'lat': latitude,
+    //     'lon': longitude,
+    //     'exclude': 'minutely,hourly,daily,alert',
+    //     'appid': _API_KEY,
+    //     'units': 'metric',
+    //   },
+    // );
+
+    return response;
   }
 }
 
