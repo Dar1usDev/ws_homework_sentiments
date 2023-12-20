@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ws_homework_sentiments/ui/pages/note_form_page/note_form.dart';
-import 'package:ws_homework_sentiments/ui/pages/notes_page/notes_page.dart';
-import 'package:ws_homework_sentiments/ui/pages/statistics_page/statistics_page.dart';
+import 'package:ws_homework_sentiments/ui/routes/note_form/note_form.dart';
+import 'package:ws_homework_sentiments/ui/routes/notes/notes_page.dart';
+import 'package:ws_homework_sentiments/ui/routes/statistics/statistics_page.dart';
 
 class RoutePage extends StatefulWidget {
   const RoutePage({super.key});

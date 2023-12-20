@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ws_homework_sentiments/core/services/network_repository.dart';
-import 'package:ws_homework_sentiments/ui/pages/common_widgets/custom_long_text_field.dart';
-import 'package:ws_homework_sentiments/ui/pages/common_widgets/custom_sliver_app_bar.dart';
-import 'package:ws_homework_sentiments/ui/pages/common_widgets/custom_text_field.dart';
-import 'package:ws_homework_sentiments/ui/pages/note_form_page/widgets/custom_elevated_button.dart';
-import 'package:ws_homework_sentiments/ui/pages/note_form_page/widgets/mood_picker.dart';
+import 'package:ws_homework_sentiments/core/services/weather_api/weather_repository.dart';
+import 'package:ws_homework_sentiments/ui/common/custom_elevated_button.dart';
+import 'package:ws_homework_sentiments/ui/common/custom_long_text_field.dart';
+import 'package:ws_homework_sentiments/ui/common/custom_sliver_app_bar.dart';
+import 'package:ws_homework_sentiments/ui/common/custom_text_field.dart';
+import 'package:ws_homework_sentiments/ui/routes//note_form/widgets/mood_picker.dart';
 
 enum ButtonState {
   unknown,
@@ -34,7 +34,7 @@ class _NoteFormState extends State<NoteForm> {
     return switch (_weatherState) {
       ButtonState.unknown => CustomElevatedButton(
           function: () async {
-            _weather = (await NetworkRepository().getCurrentWeather())
+            _weather = (await WeatherRepository().getCurrentWeather())
                 .current['temp']
                 .toString();
             setWeatherState();

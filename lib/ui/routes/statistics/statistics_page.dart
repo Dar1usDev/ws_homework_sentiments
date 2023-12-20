@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ws_homework_sentiments/ui/pages/common_widgets/custom_sliver_app_bar.dart';
+import 'package:ws_homework_sentiments/ui/common/custom_sliver_app_bar.dart';
 
 class StatisticPage extends StatefulWidget {
   const StatisticPage({super.key});
