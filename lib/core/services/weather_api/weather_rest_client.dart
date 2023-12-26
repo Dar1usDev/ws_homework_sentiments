@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:ws_homework_sentiments/core/models/weather.dart';
 
-part 'rest_client.g.dart';
+part 'weather_rest_client.g.dart';
 
 @RestApi()
-abstract class RestClient {
-  factory RestClient(Dio dio) = _RestClient;
+abstract class WeatherRestClient {
+  factory WeatherRestClient(Dio dio) = _WeatherRestClient;
 
   @GET('/data/3.0/onecall')
   Future<Weather> getCurrentWeather(

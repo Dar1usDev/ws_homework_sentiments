@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:ws_homework_sentiments/ui/common/custom_sliver_app_bar.dart';
 
-class StatisticPage extends StatefulWidget {
-  const StatisticPage({super.key});
+class StatisticsPage extends StatefulWidget {
+  const StatisticsPage({super.key});
 
   @override
-  State<StatisticPage> createState() => _StatisticPageState();
+  State<StatisticsPage> createState() => _StatisticsPageState();
 }
 
-class _StatisticPageState extends State<StatisticPage> {
+class _StatisticsPageState extends State<StatisticsPage> {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(

@@ -1,52 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:ws_homework_sentiments/core/services/weather_api/weather_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ws_homework_sentiments/ui/common/custom_elevated_button.dart';
 import 'package:ws_homework_sentiments/ui/common/custom_long_text_field.dart';
 import 'package:ws_homework_sentiments/ui/common/custom_sliver_app_bar.dart';
 import 'package:ws_homework_sentiments/ui/common/custom_text_field.dart';
+import 'package:ws_homework_sentiments/ui/common/weather_widget.dart';
 import 'package:ws_homework_sentiments/ui/routes//note_form/widgets/mood_picker.dart';
-
-enum ButtonState {
-  unknown,
-  known,
-}
+import 'package:ws_homework_sentiments/ui/routes/note_form/bloc/weather_bloc.dart';
 
 class NoteForm extends StatefulWidget {
-  const NoteForm({super.key});
+  final WeatherBloc bloc;
+
+  const NoteForm({required this.bloc, super.key});
 
   @override
   State<NoteForm> createState() => _NoteFormState();
 }
 
 class _NoteFormState extends State<NoteForm> {
-  ButtonState _weatherState = ButtonState.unknown;
-
-  late String _weather;
-
-  void setWeatherState() {
-    _weatherState = (_weatherState == ButtonState.unknown)
-        ? ButtonState.known
-        : ButtonState.unknown;
-    setState(() {});
-  }
-
-  Widget weatherWidget() {
-    return switch (_weatherState) {
-      ButtonState.unknown => CustomElevatedButton(
-          function: () async {
-            _weather = (await WeatherRepository().getCurrentWeather())
-                .current['temp']
-                .toString();
-            setWeatherState();
-          },
-          text: 'Привязать погоду',
-          iconData: Icons.cloud,
-        ),
-      ButtonState.known => CustomElevatedButton(
-          text: '${_weather}',
-          iconData: Icons.cloud,
-        ),
-    };
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -76,16 +50,24 @@ class _NoteFormState extends State<NoteForm> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: weatherWidget(),
-                  ),
+                BlocBuilder<WeatherBloc, WeatherState>(
+                  bloc: widget.bloc,
+                  builder: (context, state) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: FittedBox(
+                        fit: BoxFit.fitWidth,
+                        child: WeatherWidget(
+                          context: context,
+                          state: state,
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 FittedBox(
                   child: CustomElevatedButton(
-                    function: () {},
+                    //function: () {},
                     text: 'Сохранить',
                   ),
                 ),

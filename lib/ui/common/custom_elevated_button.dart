@@ -19,9 +19,11 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        (widget.function == null) ? null : widget.function!();
-      },
+      onPressed: (widget.function == null)
+          ? null
+          : () {
+              widget.function!();
+            },
       child: Stack(
         alignment: AlignmentDirectional.centerStart,
         children: [

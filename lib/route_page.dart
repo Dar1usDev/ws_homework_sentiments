@@ -4,7 +4,18 @@ import 'package:ws_homework_sentiments/ui/routes/notes/notes_page.dart';
 import 'package:ws_homework_sentiments/ui/routes/statistics/statistics_page.dart';
 
 class RoutePage extends StatefulWidget {
-  const RoutePage({super.key});
+  final StatisticsPage statisticsPage;
+
+  final NoteForm noteForm;
+
+  final NotesPage notesPage;
+
+  const RoutePage({
+    required this.statisticsPage,
+    required this.noteForm,
+    required this.notesPage,
+    super.key,
+  });
 
   @override
   State<RoutePage> createState() => _RoutePageState();
@@ -13,10 +24,10 @@ class RoutePage extends StatefulWidget {
 class _RoutePageState extends State<RoutePage> {
   int _selectedIndex = 2;
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    StatisticPage(),
-    NoteForm(),
-    NotesPage(),
+  late List<Widget> _widgetOptions = <Widget>[
+    widget.statisticsPage,
+    widget.noteForm,
+    widget.notesPage,
   ];
 
   void _onItemTapped(int index) {

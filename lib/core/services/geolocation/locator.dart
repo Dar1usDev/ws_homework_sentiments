@@ -1,12 +1,18 @@
 import 'package:geolocator/geolocator.dart';
 
 class Locator {
-  static Future<(double, double)> getCurrentLocation() async {
+  static Locator? _instance;
+
+  static Locator get instance => _instance ??= Locator._();
+
+  Locator._();
+
+  Future<(double, double)> getCurrentLocation() async {
     final result = await _determinePosition();
     return (result.latitude, result.longitude);
   }
 
-  static Future<Position> _determinePosition() async {
+  Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
 
