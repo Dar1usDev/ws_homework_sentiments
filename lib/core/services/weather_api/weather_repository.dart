@@ -5,10 +5,12 @@ import 'package:ws_homework_sentiments/core/services/weather_api/weather_rest_cl
 
 class WeatherRepository {
   final Locator _locator;
+
   late final WeatherRestClient _client;
   final Dio _dio = Dio();
 
-  static String _API_KEY = '6be4c1fd4c7c175cd559bb49f27d307f';
+  static String _API_KEY =
+      '6be4c1fd4c7c175cd559bb49f27d307f'; // TODO Убрать ключ
 
   WeatherRepository(this._locator) {
     _dio.interceptors
@@ -36,18 +38,6 @@ class WeatherRepository {
     // https://api.openweathermap.org/data/3.0/onecall?lat=48.50&lon=135.10
     // &exclude=minutely,hourly,daily,alerts
     // &appid=6be4c1fd4c7c175cd559bb49f27d307f&units=metric
-
-    // TODO вариант реализации без RestApi
-    // final response = await _dio.get(
-    //   '/data/3.0/onecall',
-    //   queryParameters: {
-    //     'lat': latitude,
-    //     'lon': longitude,
-    //     'exclude': 'minutely,hourly,daily,alert',
-    //     'appid': _API_KEY,
-    //     'units': 'metric',
-    //   },
-    // );
 
     return response;
   }

@@ -23,7 +23,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     if (weather == null) {
       emit(WeatherDeclined());
     } else {
-      emit(WeatherReceived());
+      emit(WeatherReceived(weather));
     }
   }
 }

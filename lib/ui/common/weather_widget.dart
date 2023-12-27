@@ -22,7 +22,7 @@ class WeatherWidget extends StatefulWidget {
 }
 
 class _WeatherWidgetState extends State<WeatherWidget> {
-  Logger logger = Logger(); // TODO Logger
+  Logger logger = Logger();
 
   @override
   void initState() {
@@ -48,23 +48,51 @@ class _WeatherWidgetState extends State<WeatherWidget> {
           text: 'Погода недоступна',
           iconData: Icons.cloud_off,
         ),
-      WeatherReceived() => Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
-            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-            border: Border.all(
-              color: Theme.of(context).primaryColorLight,
-              width: 1,
+      WeatherReceived() => SizedBox(
+          height: 50,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).cardColor,
+              borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              // border: Border.all(
+              //   color: Theme.of(context).primaryColorLight,
+              //   width: 1,
+              // ),
             ),
-          ),
-          child: Row(
-            children: [
-              Text('Давление: 100'),
-              Divider(),
-              Text('Температура: 200'),
-              Divider(),
-              Text('Влажность: 300'),
-            ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Row(
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.speed),
+                      Text(
+                        ': ${(widget.state as WeatherReceived).weather.pressure.toStringAsFixed(2)} mmHg',
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Row(
+                      children: [
+                        Icon(Icons.thermostat),
+                        Text(
+                          ': ${(widget.state as WeatherReceived).weather.temp.toStringAsFixed(1)} ºC',
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.water_drop),
+                      Text(
+                        ': ${(widget.state as WeatherReceived).weather.humidity.round()} %',
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
         )
     };

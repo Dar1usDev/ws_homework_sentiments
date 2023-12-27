@@ -67,7 +67,6 @@ class _NoteFormState extends State<NoteForm> {
                 ),
                 FittedBox(
                   child: CustomElevatedButton(
-                    //function: () {},
                     text: 'Сохранить',
                   ),
                 ),

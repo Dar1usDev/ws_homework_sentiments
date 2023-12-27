@@ -17,5 +17,6 @@ final class WeatherDeclined extends WeatherState {
 }
 
 final class WeatherReceived extends WeatherState {
-  const WeatherReceived();
+  final Weather weather;
+  const WeatherReceived(this.weather);
 }

@@ -1,38 +1,40 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:logger/logger.dart';
 
-part 'weather.g.dart';
-
-@JsonSerializable()
 class Weather {
-  @JsonKey(name: 'timezone')
   final String timezoneName;
-  @JsonKey(name: 'current')
-  final Map<String, dynamic> current;
+  final double temp;
+  final double feelsLike;
+  final double pressure;
+  final double humidity;
 
-  // TODO Переделать в кастомный fromJson без либы
-  // @JsonKey(name: 'temp')
-  // final double temp;
-  // @JsonKey(name: 'feels_like')
-  // final double feelsLike;
-  // @JsonKey(name: 'pressure')
-  // final double pressure;
-  // @JsonKey(name: 'humidity')
-  // final double humidity;
+  static const pressureConvertConst = 0.75006375541921;
 
-  Weather(
+  const Weather(
     this.timezoneName,
-    this.current,
-    //   this.temp,
-    //   this.feelsLike,
-    //   this.pressure,
-    //   this.humidity,
+    this.temp,
+    this.feelsLike,
+    this.pressure,
+    this.humidity,
   );
 
-  factory Weather.fromJson(Map<String, dynamic> json) =>
-      _$WeatherFromJson(json);
+  factory Weather.fromJson(Map<String, dynamic> json) {
+    Logger().i(json);
+    final Map<String, dynamic> current = json['current'];
 
-  Map<String, dynamic> toJson() => _$WeatherToJson(this);
+    return Weather(
+      json['timezone'],
+      double.parse(current['temp'].toString()),
+      double.parse(current['feels_like'].toString()),
+      _fromHPaToMmHg(double.parse(current['pressure'].toString())),
+      double.parse(current['humidity'].toString()),
+    );
+  }
 
-  @override
-  String toString() => toJson().toString();
+  static double _fromHPaToMmHg(double inHpa) => inHpa * pressureConvertConst;
+
+  // TODO Implement toJson
+  //Map<String, dynamic> toJson() => _$WeatherToJson(this);
+
+  // TODO Implement toString
+  // String toString() => toJson().toString();
 }
